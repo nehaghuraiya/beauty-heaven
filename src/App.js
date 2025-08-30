@@ -17,7 +17,7 @@ function App() {
     <ThemeProvider>
       <CartProvider>
         <WishlistProvider>
-          <Router>
+          <Router basename="/beauty-heaven">
             <div className="App">
               <Navbar />
               <Routes>
