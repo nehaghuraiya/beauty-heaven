@@ -10,32 +10,14 @@ import {
   Box,
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-
-const featuredProducts = [
-  {
-    id: 1,
-    name: 'Hydrating Face Cream',
-    originalPrice: 249.99,
-    price: 199.99,
-    image: 'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-  },
-  {
-    id: 2,
-    name: 'Vitamin C Serum',
-    originalPrice: 239.99,
-    price: 191.99,
-    image: 'https://images.unsplash.com/photo-1625772452859-1c03d5bf1137?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-  },
-  {
-    id: 3,
-    name: 'Natural Lipstick Set',
-    originalPrice: 229.99,
-    price: 183.99,
-    image: 'https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-  },
-];
+import { useProducts } from '../context/ProductContext';
 
 function Home() {
+  const { products } = useProducts();
+  
+  // Get first 3 products as featured products
+  const featuredProducts = products.slice(0, 3);
+  
   return (
     <Container maxWidth="lg">
       {/* Hero Section */}

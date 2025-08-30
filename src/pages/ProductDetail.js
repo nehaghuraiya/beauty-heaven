@@ -18,16 +18,17 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
-import { products } from '../data/products';
+import { useProducts } from '../context/ProductContext';
 
 function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
+  const { getProductById } = useProducts();
   const [snackbar, setSnackbar] = useState({ open: false, message: '' });
 
-  const product = products.find(p => p.id === parseInt(id));
+  const product = getProductById(id);
 
   if (!product) {
     return (

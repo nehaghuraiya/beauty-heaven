@@ -27,7 +27,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
-import { products } from '../data/productData';
+import { useProducts } from '../context/ProductContext';
 import ProductSkeleton from '../components/ProductSkeleton';
 import QuickViewModal from '../components/QuickViewModal';
 import toast from 'react-hot-toast';
@@ -40,6 +40,7 @@ function Products() {
   const [quickViewOpen, setQuickViewOpen] = useState(false);
   const { addToCart } = useCart();
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
+  const { products } = useProducts();
   const navigate = useNavigate();
 
   useEffect(() => {

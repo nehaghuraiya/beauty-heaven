@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useProducts } from '../context/ProductContext';
 import {
   Container,
   Typography,
@@ -48,6 +49,7 @@ import {
 
 const SellerPortal = () => {
   const theme = useTheme();
+  const { products, addProduct, deleteProduct, getTotalProductsValue, getLowStockProducts } = useProducts();
   const [activeTab, setActiveTab] = useState(0);
   const [openProductDialog, setOpenProductDialog] = useState(false);
   const [openProfileDialog, setOpenProfileDialog] = useState(false);
@@ -63,43 +65,6 @@ const SellerPortal = () => {
     gstNumber: 'GST123456789',
     description: 'Premium beauty products retailer with 5+ years of experience',
   });
-
-  // Sample products data
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      name: 'Luxury Face Cream',
-      category: 'Skincare',
-      price: 1299,
-      originalPrice: 1599,
-      stock: 50,
-      status: 'Active',
-      image: 'https://via.placeholder.com/150',
-      description: 'Premium anti-aging face cream with natural ingredients',
-    },
-    {
-      id: 2,
-      name: 'Matte Lipstick Set',
-      category: 'Makeup',
-      price: 899,
-      originalPrice: 1199,
-      stock: 25,
-      status: 'Active',
-      image: 'https://via.placeholder.com/150',
-      description: 'Long-lasting matte lipsticks in 6 beautiful shades',
-    },
-    {
-      id: 3,
-      name: 'Hair Growth Serum',
-      category: 'Hair Care',
-      price: 799,
-      originalPrice: 999,
-      stock: 0,
-      status: 'Out of Stock',
-      image: 'https://via.placeholder.com/150',
-      description: 'Natural hair growth serum for stronger, healthier hair',
-    },
-  ]);
 
   // New product form
   const [newProduct, setNewProduct] = useState({
@@ -120,15 +85,7 @@ const SellerPortal = () => {
 
   const handleAddProduct = () => {
     if (newProduct.name && newProduct.category && newProduct.price) {
-      const product = {
-        id: Date.now(),
-        ...newProduct,
-        price: parseFloat(newProduct.price),
-        originalPrice: parseFloat(newProduct.originalPrice) || parseFloat(newProduct.price),
-        stock: parseInt(newProduct.stock),
-        status: 'Active',
-      };
-      setProducts([...products, product]);
+      addProduct(newProduct);
       setNewProduct({
         name: '', category: '', price: '', originalPrice: '', stock: '', description: '', image: ''
       });
@@ -138,7 +95,7 @@ const SellerPortal = () => {
   };
 
   const handleDeleteProduct = (productId) => {
-    setProducts(products.filter(p => p.id !== productId));
+    deleteProduct(productId);
     setSnackbar({ open: true, message: 'Product deleted successfully!', severity: 'success' });
   };
 
@@ -150,8 +107,8 @@ const SellerPortal = () => {
   const stats = [
     { icon: <Inventory />, label: 'Total Products', value: products.length, color: 'primary.main' },
     { icon: <ShoppingCart />, label: 'Active Products', value: products.filter(p => p.status === 'Active').length, color: 'success.main' },
-    { icon: <AttachMoney />, label: 'Total Value', value: `₹${products.reduce((sum, p) => sum + (p.price * p.stock), 0).toLocaleString()}`, color: 'warning.main' },
-    { icon: <TrendingUp />, label: 'Low Stock', value: products.filter(p => p.stock < 10 && p.stock > 0).length, color: 'error.main' },
+    { icon: <AttachMoney />, label: 'Total Value', value: `₹${getTotalProductsValue().toLocaleString()}`, color: 'warning.main' },
+    { icon: <TrendingUp />, label: 'Low Stock', value: getLowStockProducts().length, color: 'error.main' },
   ];
 
   return (

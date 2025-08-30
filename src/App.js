@@ -13,13 +13,15 @@ import SellerPortal from './pages/SellerPortal';
 import { CartProvider } from './context/CartContext';
 import { WishlistProvider } from './context/WishlistContext';
 import { ThemeProvider } from './context/ThemeContext';
+import { ProductProvider } from './context/ProductContext';
 
 function App() {
   return (
     <ThemeProvider>
-      <CartProvider>
-        <WishlistProvider>
-          <Router basename={process.env.NODE_ENV === 'production' ? '/beauty-heaven' : ''}>
+      <ProductProvider>
+        <CartProvider>
+          <WishlistProvider>
+            <Router basename={process.env.NODE_ENV === 'production' ? '/beauty-heaven' : ''}>
             <div className="App">
               <Navbar />
               <Routes>
@@ -56,9 +58,10 @@ function App() {
                 }}
               />
             </div>
-          </Router>
-        </WishlistProvider>
-      </CartProvider>
+                      </Router>
+          </WishlistProvider>
+        </CartProvider>
+      </ProductProvider>
     </ThemeProvider>
   );
 }
