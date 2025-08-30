@@ -9,14 +9,13 @@ import {
   Paper,
   useTheme,
   Chip,
-  Avatar,
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import {
   Spa,
   Favorite,
   Star,
-  Eco,
+  Nature,
   Security,
   LocalShipping,
   Support,
@@ -43,7 +42,7 @@ const About = () => {
       description: 'Our beauty experts carefully curate each product, testing and selecting only the best for our customers.',
     },
     {
-      icon: <Eco sx={{ fontSize: 40, color: 'primary.main' }} />,
+      icon: <Nature sx={{ fontSize: 40, color: 'primary.main' }} />,
       title: 'Eco-Friendly',
       description: 'We support sustainable beauty with eco-friendly packaging and cruelty-free product options.',
     },
