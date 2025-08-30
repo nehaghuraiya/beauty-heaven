@@ -57,6 +57,7 @@ function Navbar() {
     { text: 'Products', path: '/products' },
     { text: 'About', path: '/about' },
     { text: 'Contact', path: '/contact' },
+    { text: 'Seller Portal', path: '/seller' },
   ];
 
   const drawer = (
